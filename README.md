@@ -2,30 +2,57 @@
 
 Collection of scripts used to analyze cells on ImageJ.
 
-## Scratch Assay Analysis Macros
+## 🎯 Master Macro (Recommended)
+
+### scratch_assay_master.ijm
+Unified macro for all scratch assay analysis modes. Asks for user input at runtime to select analysis type.
+
+**Modes:**
+- **Mode 1 — Individual**: Analyze a single currently-open image
+  - Draws red migration front line on overlay
+  - Shows cell density profile plot
+  - Outputs migration front Y position to log
+  
+- **Mode 2 — Batch by Timepoint**: Process one XY position across all timepoints (t0hr, t24hr, t48hr)
+  - Tiles processed images side-by-side with labels
+  - Useful for tracking migration progression over time
+  
+- **Mode 3 — Full Grid**: Process all 36 XY positions in 6×6 grid layout
+  - Each cell shows t0/t24/t48 triplet
+  - Displays % confluence label on each image
+  - Generates comprehensive summary panel
+
+**Quick Start:**
+1. Edit `basePath`, `condition`, and `channel` at top of macro
+2. For Mode 2, set `xyPosition` (1-36)
+3. Run macro, enter mode number (1, 2, or 3) when prompted
+
+---
+
+## Individual Analysis Macros (Reference)
 
 ### FRYL_i_scratch_assay_migration_grid_macro.ijm
-Analyzes cell migration in scratch assay experiments using a grid-based approach for the Jo Lab / D... workflow.
-- **Purpose**: Quantify cell migration and confluence changes across multiple time points
-- **Input**: Microscopy images from scratch assay experiments
-- **Output**: Migration metrics and confluence measurements
+Full grid panel macro (24 XY positions in 4×6 layout). Foundation for Mode 3 of master macro.
+- **Purpose**: Grid-based analysis of migration across multiple positions
+- **Input**: Directory of images organized by condition/timepoint/XY position
+- **Output**: Combined grid panel with red migration front lines and % confluence labels
 
 ### batch_timepoints.ijm
-Processes multiple timepoint images in batch for consistent analysis across experimental replicates.
-- **Purpose**: Automate processing of time-series microscopy data
-- **Features**: Batch processing, timepoint registration
-- **Usage**: Load directory of timepoint images and process automatically
+Single XY position, multi-timepoint processor. Foundation for Mode 2 of master macro.
+- **Purpose**: Process one XY position across t0hr/t24hr/t48hr
+- **Features**: Automatic timepoint detection, side-by-side panel tiling with labels
+- **Output**: Labeled migration panel showing progression over time
 
 ### individual_proliferation_redLine.ijm
-Analyzes individual cell proliferation using red line tracking methodology.
-- **Purpose**: Track and quantify single cell proliferation rates
-- **Method**: Red line-based cell tracking and proliferation analysis
-- **Output**: Individual cell proliferation metrics
+Single image analyzer. Foundation for Mode 1 of master macro.
+- **Purpose**: Analyze individual image or validate settings before batch processing
+- **Features**: Density-based migration front detection, red line overlay, density profile plot
+- **Output**: Migration metrics and visual confirmation of front detection
 
 ### test1.ijm
-Test macro for validation and development of new analysis features.
+Development/validation macro.
 - **Purpose**: Testing and experimentation
-- **Status**: Development/validation macro
+- **Status**: Test file
 
 ## Usage
 
